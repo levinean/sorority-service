@@ -71,7 +71,8 @@
 //   }
 
 //   @Override
-//   public void run(@NonNull MarquezConfig config, @NonNull Environment env) throws MarquezException {
+//   public void run(@NonNull MarquezConfig config, @NonNull Environment env) throws
+// MarquezException {
 //     migrateDbOrError(config);
 //     registerResources(config, env);
 //   }
@@ -80,7 +81,8 @@
 //     final Flyway flyway = new Flyway();
 //     final DataSourceFactory db = config.getDataSourceFactory();
 //     flyway.setDataSource(db.getUrl(), db.getUser(), db.getPassword());
-//     // Attempt to perform a database migration. An exception is thrown on failed migration attempts
+//     // Attempt to perform a database migration. An exception is thrown on failed migration
+// attempts
 //     // requiring we handle the throwable and apply a repair on the database to fix any
 //     // issues before terminating.
 //     try {
@@ -122,7 +124,8 @@
 //     final DatasetDao datasetDao = jdbi.onDemand(DatasetDao.class);
 
 //     final NamespaceService namespaceService = new NamespaceService(namespaceDao);
-//     final JobService jobService = new JobService(jobDao, jobVersionDao, jobRunDao, jobRunArgsDao);
+//     final JobService jobService = new JobService(jobDao, jobVersionDao, jobRunDao,
+// jobRunArgsDao);
 //     final DatasourceService datasourceService = new DatasourceService(datasourceDao);
 //     final DatasetService datasetService =
 //         new DatasetService(namespaceDao, datasourceDao, datasetDao);

@@ -54,23 +54,23 @@ compileTestJava {
 
 task testUnit(type: Test) {
   useJUnit {
-    includeCategories 'marquez.UnitTests'
+    includeCategories 'sorrority.UnitTests'
   }
 }
 
 task testIntegration(type: Test) {
   useJUnit {
-    includeCategories 'marquez.IntegrationTests'
+    includeCategories 'sorrority.IntegrationTests'
   }
 }
 
 task testDataAccess(type: Test) {
   useJUnit {
-    includeCategories 'marquez.DataAccessTests'
+    includeCategories 'sorrority.DataAccessTests'
   }
 }
 
-mainClassName = 'marquez.MarquezApp'
+mainClassName = 'sorrority.SorrorityApp'
 
 shadowJar {
   baseName = project.name

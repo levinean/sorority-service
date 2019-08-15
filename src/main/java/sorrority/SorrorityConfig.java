@@ -22,7 +22,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-public final class MarquezConfig extends Configuration {
+public final class SorrorityConfig extends Configuration {
   @Getter
   @JsonProperty("db")
   private final DataSourceFactory dataSourceFactory = new DataSourceFactory();
