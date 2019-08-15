@@ -1,0 +1,138 @@
+import com.github.jengelman.gradle.plugins.shadow.transformers.ServiceFileTransformer
+
+plugins {
+  id 'application'
+  id 'checkstyle'
+  id 'jacoco'
+  id 'java'
+  id 'com.adarshr.test-logger' version '1.7.0'
+  id 'com.diffplug.gradle.spotless' version '3.23.1'
+  id 'com.github.jk1.dependency-license-report' version '1.9'
+  id 'com.github.johnrengelman.shadow' version '4.0.4'
+  id 'net.researchgate.release' version '2.8.0'
+}
+
+repositories {
+  mavenCentral()
+}
+
+ext {
+  dropwizardVersion = '1.3.12'
+  jdbi3Version = '3.8.2'
+  lombokVersion = '1.18.8'
+}
+
+dependencies {
+  compile "io.dropwizard:dropwizard-core:${dropwizardVersion}"
+  compile "io.dropwizard:dropwizard-jdbi3:${dropwizardVersion}"
+  compile "io.dropwizard:dropwizard-json-logging:${dropwizardVersion}"
+  compile "org.jdbi:jdbi3-postgres:${jdbi3Version}"
+  compile "org.jdbi:jdbi3-sqlobject:${jdbi3Version}"
+  compile 'com.google.guava:guava:28.0-jre'  
+  compile 'io.dropwizard.metrics:metrics-jdbi3:4.1.0'
+  compile 'io.dropwizard.modules:dropwizard-flyway:1.3.0-4'
+  compile 'org.postgresql:postgresql:42.2.5'
+  compileOnly "org.projectlombok:lombok:${lombokVersion}"
+  annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+  testCompile "org.jdbi:jdbi3-testing:${jdbi3Version}"
+  testCompile 'com.opentable.components:otj-pg-embedded:0.13.1'
+  testCompile "io.dropwizard:dropwizard-testing:${dropwizardVersion}"
+  testCompile 'junit:junit:4.12'
+  testCompile 'org.mockito:mockito-core:3.0.0'
+}
+
+compileJava {
+  options.incremental = true
+  options.compilerArgs << '-parameters'
+}
+
+compileTestJava {
+  options.incremental = true
+  options.compilerArgs << '-parameters'
+}
+
+task testUnit(type: Test) {
+  useJUnit {
+    includeCategories 'marquez.UnitTests'
+  }
+}
+
+task testIntegration(type: Test) {
+  useJUnit {
+    includeCategories 'marquez.IntegrationTests'
+  }
+}
+
+task testDataAccess(type: Test) {
+  useJUnit {
+    includeCategories 'marquez.DataAccessTests'
+  }
+}
+
+mainClassName = 'marquez.MarquezApp'
+
+shadowJar {
+  baseName = project.name
+  classifier = ''
+  version = project.version
+  transform(ServiceFileTransformer)
+  manifest {
+    attributes(
+      'Created-By': "Gradle ${gradle.gradleVersion}",
+      'Built-By': System.getProperty('user.name'),
+      'Build-Jdk': System.getProperty('java.version'),
+      'Implementation-Title': project.name,
+      'Implementation-Version': project.version,
+      'Main-Class': mainClassName)
+  }
+}
+
+runShadow {
+  args = ['server', 'config.yml']
+}
+
+spotless {
+  java {
+    googleJavaFormat()
+    removeUnusedImports()
+  }
+}
+
+def reportsDir = "${buildDir}/reports";
+
+checkstyle {
+  toolVersion = '8.12'
+  configFile = rootProject.file('checkstyle.xml')
+}
+
+task checkstyle(type: Checkstyle) {
+  reports {
+    xml.enabled = true
+    html.enabled = true
+    html.destination = file("${reportsDir}/checkstyle")
+  }
+}
+
+checkstyleMain {
+  source = 'src/main/java'
+}
+
+checkstyleTest {
+  source = 'src/test/java'
+}
+
+def coverageDir = "${reportsDir}/coverage";
+
+jacoco {
+  toolVersion = '0.8.2'
+  reportsDir = file(coverageDir)
+}
+
+jacocoTestReport {
+  reports {
+    xml.enabled = true
+    html.enabled = true
+    html.destination = file(coverageDir)
+  }
+}
