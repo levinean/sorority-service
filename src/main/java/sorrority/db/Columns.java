@@ -26,19 +26,6 @@ public final class Columns {
 
   // Member column names
 
-  // uuid              UUID PRIMARY KEY,
-  // name              VARCHAR(64) NOT NULL,
-  // chapter_uuid      UUID REFERENCES chapters(uuid),
-  // pledge_class_uuid UUID REFERENCES pledge_classes(uuid),
-  // graduating_year   VARCHAR(64) NOT NULL,
-  // big               VARCHAR(64) NOT NULL,
-  // sisterhood_points INTEGER NOT NULL,
-  // executive         BOOLEAN NOT NULL,
-  // phone_number      VARCHAR(64) NOT NULL,
-  // email             VARCHAR(200) NOT NULL,
-  // birthday          VARCHAR(64) NOT NULL,
-  // dues_paid         INTEGER NOT NULL
-
   public static final String ROW_UUID = "uuid";
   public static final String NAME = "name";
   public static final String CHAPTER_UUID = "chapter_uuid";
@@ -51,6 +38,10 @@ public final class Columns {
   public static final String EMAIL = "email";
   public static final String BIRTHDAY = "birthday";
   public static final String DUES_PAID = "dues_paid";
+
+  // Chapter column names
+  public static final String SORRORITY_UUID = "sorrority_uuid";
+
 
   public static UUID uuidOrNull(ResultSet results, String column) throws SQLException {
     if (results.getObject(column) == null) {
