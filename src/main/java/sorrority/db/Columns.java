@@ -18,6 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,7 +43,9 @@ public final class Columns {
   // Chapter column names
   public static final String SORRORITY_UUID = "sorrority_uuid";
 
-
+  // Announcement column names
+  public static final String ANNOUNCEMENT = "announcement";
+  public static final String CREATED_AT = "created_at";
 
   public static UUID uuidOrNull(ResultSet results, String column) throws SQLException {
     if (results.getObject(column) == null) {
@@ -56,6 +59,13 @@ public final class Columns {
       throw new IllegalArgumentException();
     }
     return results.getObject(column, UUID.class);
+  }
+
+  public static Date dateOrNull(ResultSet results, String column) throws SQLException {
+    if (results.getObject(column) == null) {
+      return null;
+    }
+    return results.getDate(column);
   }
 
   public static Instant timestampOrNull(ResultSet results, String column) throws SQLException {

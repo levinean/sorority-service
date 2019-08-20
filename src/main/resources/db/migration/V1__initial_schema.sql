@@ -50,10 +50,12 @@ CREATE TABLE comments (
 
 CREATE TABLE announcements (
   uuid         UUID PRIMARY KEY,
-  announcement VARCHAR(1000) NOT NULL
+  announcement VARCHAR(1000) NOT NULL,
+  created_at   TIMESTAMP
 );
 
 CREATE TABLE shoutouts (
-  uuid      UUID PRIMARY KEY,
-  shoutout  VARCHAR(1000) NOT NULL
+  uuid       UUID PRIMARY KEY,
+  shoutout   VARCHAR(1000) NOT NULL,
+  created_at TIMESTAMP
 );

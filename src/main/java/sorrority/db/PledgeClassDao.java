@@ -31,13 +31,13 @@ public interface PledgeClassDao {
   PledgeClassDao createPledgeClassDao();
 
   @SqlUpdate(
-      "INSERT INTO pledge_classes (uuid, name) "
-          + "VALUES (:uuid, :name)"
+      "INSERT INTO pledge_classes (uuid, name, chapter_uuid) "
+          + "VALUES (:uuid, :name, :chapterUuid)"
           + "ON CONFLICT (name,chapter_uuid) NO NOTHING")
   void insert(@BindBean PledgeClassRow pledgeClassRow);
 
   @SqlQuery(
-      "SELECT EXISTS (SELECT 1 FROM pledge_classes WHERE (name = :name)AND(sorrority_uuid =: sorrorityUuid))")
+      "SELECT EXISTS (SELECT 1 FROM pledge_classes WHERE (name = :name)AND(chapter_uuid =: chapterUuid))")
   boolean exists(String name,UUID chapterUuid);
 
   @SqlQuery("SELECT * FROM pledge_classes WHERE uuid = :uuid")
