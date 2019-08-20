@@ -10,9 +10,10 @@ CREATE TABLE chapters (
 );
 
 CREATE TABLE pledge_classes (
-  uuid         UUID PRIMARY KEY,
-  name         VARCHAR(100) NOT NULL,
-  chapter_uuid UUID REFERENCES chapters(uuid)
+  uuid           UUID PRIMARY KEY,
+  name           VARCHAR(100) NOT NULL,
+  chapter_uuid   UUID REFERENCES chapters(uuid),
+  sorrority_uuid UUID REFERENCES sorrorities(uuid)
 );
 
 CREATE TABLE members (
