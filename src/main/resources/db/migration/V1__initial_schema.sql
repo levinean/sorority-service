@@ -6,20 +6,20 @@ CREATE TABLE sorrorities (
 CREATE TABLE chapters (
   uuid           UUID PRIMARY KEY,
   name           VARCHAR(100) NOT NULL,
-  sorrority_uuid REFERENCES sorrorities(uuid)
+  sorrority_uuid UUID REFERENCES sorrorities(uuid)
 );
 
 CREATE TABLE pledge_classes (
   uuid         UUID PRIMARY KEY,
   name         VARCHAR(100) NOT NULL,
-  chapter_uuid REFERENCES chapters(uuid)
+  chapter_uuid UUID REFERENCES chapters(uuid)
 );
 
 CREATE TABLE members (
   uuid              UUID PRIMARY KEY,
   name              VARCHAR(64) NOT NULL,
-  chapter_uuid      REFERENCES chapters(uuid),
-  pledge_class_uuid REFERENCES pledge_classes(uuid),
+  chapter_uuid      UUID REFERENCES chapters(uuid),
+  pledge_class_uuid UUID REFERENCES pledge_classes(uuid),
   graduating_year   VARCHAR(64) NOT NULL,
   big               VARCHAR(64) NOT NULL,
   sisterhood_points INTEGER NOT NULL,
@@ -29,6 +29,9 @@ CREATE TABLE members (
   birthday          VARCHAR(64) NOT NULL,
   dues_paid         INTEGER NOT NULL
 );
+
+CREATE UNIQUE INDEX member_index
+ON members (name, birthday, email);
 
 CREATE TABLE events (
   uuid        UUID PRIMARY KEY,
@@ -41,7 +44,7 @@ CREATE TABLE events (
 CREATE TABLE comments (
   uuid       UUID PRIMARY KEY,
   comment    VARCHAR(1000) NOT NULL,
-  event_uuid REFERENCES events(uuid)
+  event_uuid UUID REFERENCES events(uuid)
 );
 
 CREATE TABLE announcements (

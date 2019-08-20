@@ -24,51 +24,33 @@ import java.util.UUID;
 public final class Columns {
   private Columns() {}
 
-  // Common column names
+  // Member column names
 
-  public static final String ROW_UUID = "guid";
-  public static final String CREATED_AT = "created_at";
-  public static final String UPDATED_AT = "updated_at";
+  // uuid              UUID PRIMARY KEY,
+  // name              VARCHAR(64) NOT NULL,
+  // chapter_uuid      UUID REFERENCES chapters(uuid),
+  // pledge_class_uuid UUID REFERENCES pledge_classes(uuid),
+  // graduating_year   VARCHAR(64) NOT NULL,
+  // big               VARCHAR(64) NOT NULL,
+  // sisterhood_points INTEGER NOT NULL,
+  // executive         BOOLEAN NOT NULL,
+  // phone_number      VARCHAR(64) NOT NULL,
+  // email             VARCHAR(200) NOT NULL,
+  // birthday          VARCHAR(64) NOT NULL,
+  // dues_paid         INTEGER NOT NULL
+
+  public static final String ROW_UUID = "uuid";
   public static final String NAME = "name";
-  public static final String DESCRIPTION = "description";
-
-  // Namespace ownership column names
-
-  public static final String NAMESPACE_UUID = "namespace_guid";
-  public static final String OWNER_UUID = "owner_uuid";
-  public static final String CURRENT_OWNER_NAME = "current_ownership";
-
-  // Job column names
-
-  public static final String JOB_UUID = "job_guid";
-  public static final String JOB_VERSION_UUID = "job_version_guid";
-  public static final String INPUT_DATASET_URNS = "input_dataset_urns";
-  public static final String OUTPUT_DATASET_URNS = "output_dataset_urns";
-  public static final String LOCATION = "uri";
-  public static final String VERSION = "version";
-  public static final String CURRENT_VERSION_UUID = "current_version_uuid";
-  public static final String JOB_RUN_UUID = "job_run_guid";
-  public static final String NOMINAL_START_TIME = "nominal_start_time";
-  public static final String NOMINAL_END_TIME = "nominal_end_time";
-  public static final String LATEST_JOB_RUN_UUID = "latest_run_guid";
-  public static final String CURRENT_RUN_STATE = "current_state";
-  public static final String CHECKSUM = "hex_digest";
-  public static final String RUN_ARGS_CHECKSUM = "job_run_args_hex_digest";
-  public static final String RUN_ARGS = "args_json";
-  public static final String RUN_STATE = "state";
-  public static final String TRANSITIONED_AT = "transitioned_at";
-
-  // Dataset column names
-
-  public static final String DATASET_UUID = "dataset_uuid";
-  public static final String URN = "urn";
-  public static final String DATASOURCE_UUID = "datasource_uuid";
-  public static final String DATASOURCE_URN = "datasource_urn";
-  public static final String CONNECTION_URL = "connection_url";
-  public static final String DB_TABLE_INFO_UUID = "db_table_info_uuid";
-  public static final String DB_NAME = "db";
-  public static final String DB_SCHEMA_NAME = "db_schema";
-  public static final String DB_TABLE_NAME = "db_table_name";
+  public static final String CHAPTER_UUID = "chapter_uuid";
+  public static final String PLEDGE_CLASS_UUID = "pledge_class_uuid";
+  public static final String GRADUATING_YEAR = "graduating_year";
+  public static final String BIG = "big";
+  public static final String SISTERHOOD_POINTS = "sisterhood_points";
+  public static final String EXECUTIVE = "executive";
+  public static final String PHONE_NUMBER = "phone_number";
+  public static final String EMAIL = "email";
+  public static final String BIRTHDAY = "birthday";
+  public static final String DUES_PAID = "dues_paid";
 
   public static UUID uuidOrNull(ResultSet results, String column) throws SQLException {
     if (results.getObject(column) == null) {
@@ -103,6 +85,13 @@ public final class Columns {
       return null;
     }
     return results.getString(column);
+  }
+
+  public static Integer intOrNull(ResultSet results, String column) throws SQLException {
+    if (results.getObject(column) == null) {
+      return null;
+    }
+    return results.getInt(column);
   }
 
   public static String stringOrThrow(ResultSet results, String column) throws SQLException {
