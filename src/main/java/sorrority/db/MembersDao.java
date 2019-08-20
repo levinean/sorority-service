@@ -17,14 +17,13 @@ package sorrority.db;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
-import sorrority.db.mappers.MemberRowMapper;
-import sorrority.db.models.MemberRow;
 import org.jdbi.v3.sqlobject.CreateSqlObject;
 import org.jdbi.v3.sqlobject.config.RegisterRowMapper;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
+import sorrority.db.mappers.MemberRowMapper;
+import sorrority.db.models.MemberRow;
 
 @RegisterRowMapper(MemberRowMapper.class)
 public interface MembersDao {
@@ -33,12 +32,13 @@ public interface MembersDao {
 
   @SqlUpdate(
       "INSERT INTO members (uuid, name, chapter_uuid, pledge_class_uuid, graduating_year,"
-      + " big, sisterhood_points, executive, phone_number, email, birthday, dues_paid) "
-      + "VALUES (:uuid, :name, :chapterUuid, :pledgeClassUuid, :graduatingYear,"
-      + " big, :sisterhoodPoints, :executive, :phoneNumber, :email, :birthday, :duesPaid)")
+          + " big, sisterhood_points, executive, phone_number, email, birthday, dues_paid) "
+          + "VALUES (:uuid, :name, :chapterUuid, :pledgeClassUuid, :graduatingYear,"
+          + " big, :sisterhoodPoints, :executive, :phoneNumber, :email, :birthday, :duesPaid)")
   void insert(@BindBean MemberRow memberRow);
 
-  @SqlQuery("SELECT EXISTS (SELECT 1 FROM members WHERE (name = :name) AND (email = :email) AND (birthday = :birthday))")
+  @SqlQuery(
+      "SELECT EXISTS (SELECT 1 FROM members WHERE (name = :name) AND (email = :email) AND (birthday = :birthday))")
   boolean exists(String name, String email, String birthday);
 
   @SqlQuery("SELECT * FROM members WHERE uuid = :uuid")

@@ -94,6 +94,13 @@ public final class Columns {
     return results.getInt(column);
   }
 
+  public static Boolean booleanOrNull(ResultSet results, String column) throws SQLException {
+    if (results.getObject(column) == null) {
+      return null;
+    }
+    return results.getBoolean(column);
+  }
+
   public static String stringOrThrow(ResultSet results, String column) throws SQLException {
     if (results.getObject(column) == null) {
       throw new IllegalArgumentException();

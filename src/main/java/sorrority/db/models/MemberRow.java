@@ -8,6 +8,7 @@ import lombok.Data;
 @Builder
 public class MemberRow {
   private UUID uuid;
+  private String name;
   private UUID chapterUuid;
   private UUID pledgeClassUuid;
   private String graduatingYear;
