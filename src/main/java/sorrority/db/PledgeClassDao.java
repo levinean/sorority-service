@@ -22,30 +22,30 @@ import org.jdbi.v3.sqlobject.config.RegisterRowMapper;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
-import sorrority.db.mappers.ChapterRowMapper;
-import sorrority.db.models.ChapterRow;
+import sorrority.db.mappers.PledgeClassRowMapper;
+import sorrority.db.models.PledgeClassRow;
 
-@RegisterRowMapper(ChapterRowMapper.class)
-public interface ChapterDao {
+@RegisterRowMapper(PledgeClassRowMapper.class)
+public interface PledgeClassDao {
   @CreateSqlObject
-  ChapterDao createChapterDao();
+  PledgeClassDao createPledgeClassDao();
 
   @SqlUpdate(
-      "INSERT INTO chapters (uuid, name) "
+      "INSERT INTO pledge_classes (uuid, name) "
           + "VALUES (:uuid, :name)"
-          + "ON CONFLICT (name,sorrority_uuid) NO NOTHING")
-  void insert(@BindBean ChapterRow chapterRow);
+          + "ON CONFLICT (name,chapter_uuid) NO NOTHING")
+  void insert(@BindBean PledgeClassRow pledgeClassRow);
 
   @SqlQuery(
-      "SELECT EXISTS (SELECT 1 FROM chapters WHERE (name = :name)AND(sorrority_uuid =: sorrorityUuid))")
-  boolean exists(String name,UUID sorrorityUuid);
+      "SELECT EXISTS (SELECT 1 FROM pledge_classes WHERE (name = :name)AND(sorrority_uuid =: sorrorityUuid))")
+  boolean exists(String name,UUID chapterUuid);
 
-  @SqlQuery("SELECT * FROM chapters WHERE uuid = :uuid")
-  Optional<ChapterRow> findBy(UUID uuid);
+  @SqlQuery("SELECT * FROM pledge_classes WHERE uuid = :uuid")
+  Optional<PledgeClassRow> findBy(UUID uuid);
 
-  @SqlUpdate("DELETE FROM chapters WHERE uuid = :uuid")
-  void deleteChapter(UUID uuid);
+  @SqlUpdate("DELETE FROM pledge_classes WHERE uuid = :uuid")
+  void deletePledgeClass(UUID uuid);
 
-  @SqlQuery("SELECT * FROM chapters")
-  List<ChapterRow> getAll();
+  @SqlQuery("SELECT * FROM pledge_classes")
+  List<PledgeClassRow> getAll();
 }

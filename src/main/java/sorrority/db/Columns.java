@@ -43,6 +43,7 @@ public final class Columns {
   public static final String SORRORITY_UUID = "sorrority_uuid";
 
 
+
   public static UUID uuidOrNull(ResultSet results, String column) throws SQLException {
     if (results.getObject(column) == null) {
       return null;
