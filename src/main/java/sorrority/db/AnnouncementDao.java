@@ -14,38 +14,34 @@
 
 package sorrority.db;
 
+import java.time.Instant;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import org.jdbi.v3.sqlobject.CreateSqlObject;
 import org.jdbi.v3.sqlobject.config.RegisterRowMapper;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
-import sorrority.db.mappers.ChapterRowMapper;
-import sorrority.db.models.ChapterRow;
+import sorrority.db.mappers.AnnouncementRowMapper;
+import sorrority.db.models.AnnouncementRow;
 
-@RegisterRowMapper(ChapterRowMapper.class)
-public interface ChapterDao {
+@RegisterRowMapper(AnnouncementRowMapper.class)
+public interface AnnouncementDao {
   @CreateSqlObject
-  ChapterDao createChapterDao();
+  AnnouncementDao createAnnouncementDao();
 
   @SqlUpdate(
-      "INSERT INTO chapters (uuid, name, sorrority_uuid) "
-          + "VALUES (:uuid, :name, :sorrorityUuid)"
-          + "ON CONFLICT (name,sorrority_uuid) NO NOTHING")
-  void insert(@BindBean ChapterRow chapterRow);
+      "INSERT INTO announcements (uuid, announcement, created_at) "
+          + "VALUES (:uuid, :announcement, :createdAt)"
+          + "ON CONFLICT (name,chapter_uuid) NO NOTHING")
+  void insert(@BindBean AnnouncementRow AnnouncementRow);
 
-  @SqlQuery(
-      "SELECT EXISTS (SELECT 1 FROM chapters WHERE (name = :name)AND(sorrority_uuid =: sorrorityUuid))")
-  boolean exists(String name,UUID sorrorityUuid);
+  @SqlUpdate("DELETE FROM announcements WHERE uuid = :uuid")
+  void deleteAnnouncement(UUID uuid);
 
-  @SqlQuery("SELECT * FROM chapters WHERE uuid = :uuid")
-  Optional<ChapterRow> findBy(UUID uuid);
+  @SqlUpdate("DELETE FROM announcements WHERE created_at < :time")
+  void cleanUpAnnouncements(Instant time);
 
-  @SqlUpdate("DELETE FROM chapters WHERE uuid = :uuid")
-  void deleteChapter(UUID uuid);
-
-  @SqlQuery("SELECT * FROM chapters")
-  List<ChapterRow> getAll();
+  @SqlQuery("SELECT * FROM announcements")
+  List<AnnouncementRow> getAll();
 }
