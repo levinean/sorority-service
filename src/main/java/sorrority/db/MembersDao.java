@@ -26,6 +26,7 @@ import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
+@RegisterRowMapper(MemberRowMapper.class)
 public interface MembersDao {
   @CreateSqlObject
   MembersDao createMembersDao();
@@ -35,7 +36,26 @@ public interface MembersDao {
       + " big, sisterhood_points, executive, phone_number, email, birthday, dues_paid) "
       + "VALUES (:uuid, :name, :chapterUuid, :pledgeClassUuid, :graduatingYear,"
       + " big, :sisterhoodPoints, :executive, :phoneNumber, :email, :birthday, :duesPaid)")
-  @RegisterRowMapper(MemberRowMapper.class)
   void insert(@BindBean MemberRow memberRow);
 
+  @SqlQuery("SELECT EXISTS (SELECT 1 FROM members WHERE (name = :name) AND (email = :email) AND (birthday = :birthday))")
+  boolean exists(String name, String email, String birthday);
+
+  @SqlQuery("SELECT * FROM members WHERE uuid = :uuid")
+  Optional<MemberRow> findBy(UUID uuid);
+
+  @SqlQuery("SELECT * FROM members WHERE pledge_class_uuid = :pledgeClassUuid")
+  List<MemberRow> findAllMembersInPledgeClass(UUID pledgeClassUuid);
+
+  @SqlQuery("SELECT * FROM members WHERE chapter_uuid = :chapterUuid")
+  List<MemberRow> findAllMembersInChapter(UUID chapterUuid);
+
+  @SqlUpdate("DELETE FROM members WHERE uuid = :uuid")
+  void deleteMember(UUID uuid);
+
+  @SqlUpdate("UPDATE members SET sisterhood_points = :newPoints WHERE uuid = :uuid")
+  void updateSisterhoodPoints(UUID uuid, int newPoints);
+
+  @SqlUpdate("UPDATE members SET sisterhood_points = 0 WHERE chapter_uuid = :chapterUuid")
+  void resetSisterhoodPoints(UUID chapterUuid);
 }

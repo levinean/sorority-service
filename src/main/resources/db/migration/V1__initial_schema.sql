@@ -30,6 +30,9 @@ CREATE TABLE members (
   dues_paid         INTEGER NOT NULL
 );
 
+CREATE UNIQUE INDEX member_index
+ON members (name, birthday, email);
+
 CREATE TABLE events (
   uuid        UUID PRIMARY KEY,
   name        VARCHAR(200) NOT NULL,
