@@ -1,9 +1,9 @@
 package sorrority.db.mappers;
 
+import static sorrority.db.Columns.booleanOrNull;
 import static sorrority.db.Columns.intOrNull;
 import static sorrority.db.Columns.stringOrNull;
 import static sorrority.db.Columns.uuidOrNull;
-import static sorrority.db.Columns.booleanOrNull;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

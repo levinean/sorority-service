@@ -37,9 +37,10 @@ ON members (name, birthday, email);
 CREATE TABLE events (
   uuid        UUID PRIMARY KEY,
   name        VARCHAR(200) NOT NULL,
-  description VARCHAR(1000) NOT NULL,
+  description TIMESTAMP NOT NULL,
   score       INTEGER NOT NULL,
-  date        VARCHAR(64) NOT NULL
+  event_time  VARCHAR(64) NOT NULL,
+  event_day  VARCHAR(64) NOT NULL
 );
 
 CREATE TABLE comments (

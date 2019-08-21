@@ -50,6 +50,12 @@ public final class Columns {
   // Shoutout column names
   public static final String SHOUTOUT = "shoutout";
 
+  // Event column names
+  public static final String DESCRIPTION = "description";
+  public static final String EVENT_TIME = "event_time";
+  public static final String EVENT_DAY = "event_day";
+  public static final String SCORE = "score";
+
   public static UUID uuidOrNull(ResultSet results, String column) throws SQLException {
     if (results.getObject(column) == null) {
       return null;

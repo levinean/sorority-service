@@ -1,7 +1,7 @@
 package sorrority.db.mappers;
 
-import static sorrority.db.Columns.timestampOrNull;
 import static sorrority.db.Columns.stringOrNull;
+import static sorrority.db.Columns.timestampOrNull;
 import static sorrority.db.Columns.uuidOrNull;
 
 import java.sql.ResultSet;

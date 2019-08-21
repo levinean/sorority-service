@@ -6,7 +6,11 @@ import lombok.Data;
 
 @Data
 @Builder
-public class SorrorityRow {
+public class EventRow {
   private UUID uuid;
   private String name;
+  private String description;
+  private String eventTime;
+  private String eventDay;
+  private int score;
 }
