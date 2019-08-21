@@ -36,8 +36,7 @@ public interface SorrorityDao {
           + "ON CONFLICT (name) DO NOTHING")
   void insert(@BindBean SorrorityRow sorrorityRow);
 
-  @SqlQuery(
-      "SELECT EXISTS (SELECT 1 FROM sorrorities WHERE (name = :name))")
+  @SqlQuery("SELECT EXISTS (SELECT 1 FROM sorrorities WHERE (name = :name))")
   boolean exists(String name);
 
   @SqlQuery("SELECT * FROM sorrorities WHERE uuid = :uuid")

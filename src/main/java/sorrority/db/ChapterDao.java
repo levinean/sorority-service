@@ -38,7 +38,7 @@ public interface ChapterDao {
 
   @SqlQuery(
       "SELECT EXISTS (SELECT 1 FROM chapters WHERE (name = :name)AND(sorrority_uuid =: sorrorityUuid))")
-  boolean exists(String name,UUID sorrorityUuid);
+  boolean exists(String name, UUID sorrorityUuid);
 
   @SqlQuery("SELECT * FROM chapters WHERE uuid = :uuid")
   Optional<ChapterRow> findBy(UUID uuid);

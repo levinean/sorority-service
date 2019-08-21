@@ -38,7 +38,7 @@ public interface PledgeClassDao {
 
   @SqlQuery(
       "SELECT EXISTS (SELECT 1 FROM pledge_classes WHERE (name = :name)AND(chapter_uuid =: chapterUuid))")
-  boolean exists(String name,UUID chapterUuid);
+  boolean exists(String name, UUID chapterUuid);
 
   @SqlQuery("SELECT * FROM pledge_classes WHERE uuid = :uuid")
   Optional<PledgeClassRow> findBy(UUID uuid);
