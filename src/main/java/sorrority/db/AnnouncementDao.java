@@ -33,7 +33,7 @@ public interface AnnouncementDao {
   @SqlUpdate(
       "INSERT INTO announcements (uuid, announcement, created_at) "
           + "VALUES (:uuid, :announcement, :createdAt)"
-          + "ON CONFLICT (name,chapter_uuid) NO NOTHING")
+          + "ON CONFLICT (name,chapter_uuid) DO NOTHING")
   void insert(@BindBean AnnouncementRow AnnouncementRow);
 
   @SqlUpdate("DELETE FROM announcements WHERE uuid = :uuid")

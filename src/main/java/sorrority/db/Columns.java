@@ -47,6 +47,9 @@ public final class Columns {
   public static final String ANNOUNCEMENT = "announcement";
   public static final String CREATED_AT = "created_at";
 
+  // Shoutout column names
+  public static final String SHOUTOUT = "shoutout";
+
   public static UUID uuidOrNull(ResultSet results, String column) throws SQLException {
     if (results.getObject(column) == null) {
       return null;

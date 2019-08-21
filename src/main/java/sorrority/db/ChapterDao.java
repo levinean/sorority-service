@@ -33,7 +33,7 @@ public interface ChapterDao {
   @SqlUpdate(
       "INSERT INTO chapters (uuid, name, sorrority_uuid) "
           + "VALUES (:uuid, :name, :sorrorityUuid)"
-          + "ON CONFLICT (name,sorrority_uuid) NO NOTHING")
+          + "ON CONFLICT (name,sorrority_uuid) DO NOTHING")
   void insert(@BindBean ChapterRow chapterRow);
 
   @SqlQuery(
