@@ -56,6 +56,10 @@ public final class Columns {
   public static final String EVENT_DAY = "event_day";
   public static final String SCORE = "score";
 
+  // Comment column names
+  public static final String COMMENT = "comment";
+  public static final String EVENT_UUID = "event_uuid";
+
   public static UUID uuidOrNull(ResultSet results, String column) throws SQLException {
     if (results.getObject(column) == null) {
       return null;
