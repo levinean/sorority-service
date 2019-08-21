@@ -14,38 +14,34 @@
 
 package sorrority.db;
 
+import java.time.Instant;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import org.jdbi.v3.sqlobject.CreateSqlObject;
 import org.jdbi.v3.sqlobject.config.RegisterRowMapper;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
-import sorrority.db.mappers.PledgeClassRowMapper;
-import sorrority.db.models.PledgeClassRow;
+import sorrority.db.mappers.ShoutoutRowMapper;
+import sorrority.db.models.ShoutoutRow;
 
-@RegisterRowMapper(PledgeClassRowMapper.class)
-public interface PledgeClassDao {
+@RegisterRowMapper(ShoutoutRowMapper.class)
+public interface ShoutoutDao {
   @CreateSqlObject
-  PledgeClassDao createPledgeClassDao();
+  ShoutoutDao createShoutoutDao();
 
   @SqlUpdate(
-      "INSERT INTO pledge_classes (uuid, name, chapter_uuid) "
-          + "VALUES (:uuid, :name, :chapterUuid)"
+      "INSERT INTO shoutouts (uuid, shoutout, created_at) "
+          + "VALUES (:uuid, :shoutout, :createdAt)"
           + "ON CONFLICT (name,chapter_uuid) DO NOTHING")
-  void insert(@BindBean PledgeClassRow pledgeClassRow);
+  void insert(@BindBean ShoutoutRow shoutoutRow);
 
-  @SqlQuery(
-      "SELECT EXISTS (SELECT 1 FROM pledge_classes WHERE (name = :name)AND(chapter_uuid =: chapterUuid))")
-  boolean exists(String name,UUID chapterUuid);
+  @SqlUpdate("DELETE FROM shoutouts WHERE uuid = :uuid")
+  void deleteShoutout(UUID uuid);
 
-  @SqlQuery("SELECT * FROM pledge_classes WHERE uuid = :uuid")
-  Optional<PledgeClassRow> findBy(UUID uuid);
+  @SqlUpdate("DELETE FROM shoutouts WHERE created_at < :time")
+  void cleanUpShoutouts(Instant time);
 
-  @SqlUpdate("DELETE FROM pledge_classes WHERE uuid = :uuid")
-  void deletePledgeClass(UUID uuid);
-
-  @SqlQuery("SELECT * FROM pledge_classes")
-  List<PledgeClassRow> getAll();
+  @SqlQuery("SELECT * FROM shoutouts")
+  List<ShoutoutRow> getAll();
 }

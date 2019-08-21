@@ -33,7 +33,7 @@ public interface SorrorityDao {
   @SqlUpdate(
       "INSERT INTO sorrorities (uuid, name) "
           + "VALUES (:uuid, :name)"
-          + "ON CONFLICT (name) NO NOTHING")
+          + "ON CONFLICT (name) DO NOTHING")
   void insert(@BindBean SorrorityRow sorrorityRow);
 
   @SqlQuery(
