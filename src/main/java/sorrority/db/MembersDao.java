@@ -41,6 +41,10 @@ public interface MembersDao {
       "SELECT EXISTS (SELECT 1 FROM members WHERE (name = :name) AND (email = :email) AND (birthday = :birthday))")
   boolean exists(String name, String email, String birthday);
 
+  @SqlQuery(
+      "SELECT EXISTS (SELECT 1 FROM members WHERE uuid = :uuid)")
+  boolean exists(UUID uuid);
+
   @SqlQuery("SELECT * FROM members WHERE uuid = :uuid")
   Optional<MemberRow> findBy(UUID uuid);
 
