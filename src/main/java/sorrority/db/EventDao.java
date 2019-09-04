@@ -14,9 +14,7 @@
 
 package sorrority.db;
 
-import java.time.Instant;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import org.jdbi.v3.sqlobject.CreateSqlObject;
 import org.jdbi.v3.sqlobject.config.RegisterRowMapper;
@@ -41,19 +39,32 @@ public interface EventDao {
   void deleteEvent(UUID uuid);
 
   @SqlQuery("SELECT * FROM events WHERE uuid = :uuid")
-  Optional<EventRow> findby(UUID uuid);
+  EventRow findby(UUID uuid);
+
+  @SqlQuery("SELECT EXISTS (SELECT 1 FROM events WHERE uuid = :uuid)")
+  boolean exists(UUID uuid);
+
+  @SqlQuery(
+      "SELECT EXISTS (SELECT 1 FROM events WHERE event_time = :eventTime AND event_day = :eventDay)")
+  boolean existsAtSameTime(String eventTime, String eventDay);
 
   @SqlUpdate("UPDATE events SET score = :newScore WHERE uuid = :uuid")
   void updateScore(UUID uuid, int newScore);
 
+  @SqlUpdate("UPDATE events SET number_attended = :newNumberAttended WHERE uuid = :uuid")
+  void updateNumberAttended(UUID uuid, int newNumberAttended);
+
   @SqlUpdate("UPDATE events SET event_time = :newTime WHERE uuid = :uuid")
-  void updateTime(UUID uuid, Instant newTime);
+  void updateTime(UUID uuid, String newTime);
+
+  @SqlUpdate("UPDATE events SET event_day = :newDay WHERE uuid = :uuid")
+  void updateDay(UUID uuid, String newDay);
 
   @SqlUpdate("UPDATE events SET description = :newDescription WHERE uuid = :uuid")
   void updateDescription(UUID uuid, String newDescription);
 
   @SqlQuery("SELECT * FROM events WHERE event_day = :day")
-  Optional<EventRow> getAllEventsOnDay(String day);
+  List<EventRow> getAllEventsOnDay(String day);
 
   @SqlQuery("SELECT * FROM events")
   List<EventRow> getAll();
