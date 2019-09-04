@@ -36,6 +36,9 @@ public interface AnnouncementDao {
           + "ON CONFLICT (name,chapter_uuid) DO NOTHING")
   void insert(@BindBean AnnouncementRow AnnouncementRow);
 
+  @SqlQuery("SELECT EXISTS (SELECT 1 FROM announcements WHERE uuid = :uuid)")
+  boolean exists(UUID uuid);
+
   @SqlUpdate("DELETE FROM announcements WHERE uuid = :uuid")
   void deleteAnnouncement(UUID uuid);
 
