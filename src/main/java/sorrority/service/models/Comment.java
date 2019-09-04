@@ -11,4 +11,3 @@ public class Comment {
   private String comment;
   private UUID eventUuid;
 }
-

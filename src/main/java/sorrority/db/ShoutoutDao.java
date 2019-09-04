@@ -36,6 +36,9 @@ public interface ShoutoutDao {
           + "ON CONFLICT (name,chapter_uuid) DO NOTHING")
   void insert(@BindBean ShoutoutRow shoutoutRow);
 
+  @SqlQuery("SELECT EXISTS (SELECT 1 FROM shoutouts WHERE uuid = :uuid)")
+  boolean exists(UUID uuid);
+
   @SqlUpdate("DELETE FROM shoutouts WHERE uuid = :uuid")
   void deleteShoutout(UUID uuid);
 

@@ -14,5 +14,4 @@ public final class AnnouncementRowMapper {
         .createdAt(announcement.getCreatedAt())
         .build();
   }
-
 }

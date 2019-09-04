@@ -12,10 +12,7 @@ public final class SorrorityMapper {
   private SorrorityMapper() {}
 
   public static Sorrority map(@NonNull final SorrorityRow sorrority) {
-    return Sorrority.builder()
-        .uuid(sorrority.getUuid())
-        .name(sorrority.getName())
-        .build();
+    return Sorrority.builder().uuid(sorrority.getUuid()).name(sorrority.getName()).build();
   }
 
   public static List<Sorrority> map(@NonNull final List<SorrorityRow> rows) {

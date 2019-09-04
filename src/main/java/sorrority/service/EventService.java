@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.UUID;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import sorrority.db.CommentDao;
 import sorrority.db.EventDao;
 import sorrority.db.models.EventRow;
 import sorrority.service.mappers.EventMapper;
@@ -14,9 +15,11 @@ import sorrority.service.models.Event;
 @Slf4j
 public class EventService {
   private final EventDao eventDao;
+  private final CommentDao commentDao;
 
-  public EventService(@NonNull final EventDao eventDao) {
+  public EventService(@NonNull final EventDao eventDao, @NonNull final CommentDao commentDao) {
     this.eventDao = eventDao;
+    this.commentDao = commentDao;
   }
 
   public void createEvent(Event event) {
@@ -32,6 +35,7 @@ public class EventService {
     if (eventDao.exists(eventUuid)) {
       EventRow eventRow = eventDao.findby(eventUuid);
       eventDao.deleteEvent(eventUuid);
+      commentDao.deleteEventComments(eventUuid);
       log.info("Event was deleted with name " + eventRow.getName());
     } else {
       log.info("Event does not exist");

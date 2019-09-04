@@ -39,6 +39,9 @@ public interface SorrorityDao {
   @SqlQuery("SELECT EXISTS (SELECT 1 FROM sorrorities WHERE (name = :name))")
   boolean exists(String name);
 
+  @SqlQuery("SELECT EXISTS (SELECT 1 FROM sorrorities WHERE (uuid = :uuid))")
+  boolean exists(UUID uuid);
+
   @SqlQuery("SELECT * FROM sorrorities WHERE uuid = :uuid")
   Optional<SorrorityRow> findBy(UUID uuid);
 

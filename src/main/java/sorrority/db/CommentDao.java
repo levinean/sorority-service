@@ -35,6 +35,9 @@ public interface CommentDao {
           + "ON CONFLICT (comment,event_uuid) DO NOTHING")
   void insert(@BindBean CommentRow CommentRow);
 
+  @SqlQuery("SELECT EXISTS (SELECT 1 FROM comments WHERE uuid = :uuid)")
+  boolean exists(UUID uuid);
+
   @SqlUpdate("DELETE FROM comments WHERE uuid = :uuid")
   void deleteComment(UUID uuid);
 
