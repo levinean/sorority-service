@@ -35,12 +35,13 @@ CREATE UNIQUE INDEX member_index
 ON members (name, birthday, email);
 
 CREATE TABLE events (
-  uuid        UUID PRIMARY KEY,
-  name        VARCHAR(200) NOT NULL,
-  description TIMESTAMP NOT NULL,
-  score       INTEGER NOT NULL,
-  event_time  VARCHAR(64) NOT NULL,
-  event_day  VARCHAR(64) NOT NULL
+  uuid            UUID PRIMARY KEY,
+  name            VARCHAR(200) NOT NULL,
+  description     TIMESTAMP NOT NULL,
+  score           INTEGER NOT NULL,
+  event_time      VARCHAR(64) NOT NULL,
+  event_day       VARCHAR(64) NOT NULL,
+  number_attended INTEGER NOT NULL
 );
 
 CREATE TABLE comments (

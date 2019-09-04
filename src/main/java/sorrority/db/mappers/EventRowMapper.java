@@ -23,6 +23,7 @@ public final class EventRowMapper implements RowMapper<EventRow> {
         .eventTime(stringOrNull(results, Columns.EVENT_TIME))
         .eventDay(stringOrNull(results, Columns.EVENT_DAY))
         .score(intOrNull(results, Columns.SCORE))
+        .numberAttended(intOrNull(results, Columns.NUMBER_ATTENDED))
         .build();
   }
 }

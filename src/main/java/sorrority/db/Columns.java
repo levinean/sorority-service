@@ -55,6 +55,7 @@ public final class Columns {
   public static final String EVENT_TIME = "event_time";
   public static final String EVENT_DAY = "event_day";
   public static final String SCORE = "score";
+  public static final String NUMBER_ATTENDED = "number_attended";
 
   // Comment column names
   public static final String COMMENT = "comment";

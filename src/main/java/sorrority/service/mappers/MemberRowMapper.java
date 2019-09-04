@@ -1,17 +1,15 @@
 package sorrority.service.mappers;
 
-
 import java.util.UUID;
-
 import lombok.NonNull;
 import sorrority.db.models.MemberRow;
 import sorrority.service.models.Member;
 
-public final class MemberRowMapper{
-    private MemberRowMapper(){}
+public final class MemberRowMapper {
+  private MemberRowMapper() {}
 
-    public static MemberRow map(@NonNull final Member member){
-        return MemberRow.builder()
+  public static MemberRow map(@NonNull final Member member) {
+    return MemberRow.builder()
         .big(member.getBig())
         .birthday(member.getBirthday())
         .chapterUuid(member.getChapterUuid())
@@ -25,5 +23,5 @@ public final class MemberRowMapper{
         .sisterhoodPoints(member.getSisterhoodPoints())
         .uuid(UUID.randomUUID())
         .build();
-    }
+  }
 }
