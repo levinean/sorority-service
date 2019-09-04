@@ -19,8 +19,8 @@ public class AnnouncementService {
   }
 
   public void createAnnouncement(Announcement announcement) {
-      announcementDao.insert(AnnouncementRowMapper.map(announcement));
-      log.info("Announcement was inserted");
+    announcementDao.insert(AnnouncementRowMapper.map(announcement));
+    log.info("Announcement was inserted");
   }
 
   public void deleteAnnouncement(UUID announcementUuid) {
@@ -32,9 +32,9 @@ public class AnnouncementService {
     }
   }
 
-  public void cleanUpAnnouncements(Instant time){
-      announcementDao.cleanUpAnnouncements(time);
-      log.info("Announcements deleted from before " + time.toString());
+  public void cleanUpAnnouncements(Instant time) {
+    announcementDao.cleanUpAnnouncements(time);
+    log.info("Announcements deleted from before " + time.toString());
   }
 
   public List<Announcement> getAll() {
