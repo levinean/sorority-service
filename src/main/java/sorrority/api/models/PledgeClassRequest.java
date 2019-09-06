@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @ToString
 @Getter
 public final class PledgeClassRequest {
-    @NotBlank String name;
-    @NotBlank private UUID chapterUuid;
-    @NotBlank private UUID sorrorityUuid;
+  @NotBlank String name;
+  @NotBlank private UUID chapterUuid;
+  @NotBlank private UUID sorrorityUuid;
 }

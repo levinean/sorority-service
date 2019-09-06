@@ -12,8 +12,8 @@ import org.hibernate.validator.constraints.NotBlank;
 @ToString
 @Getter
 public final class EventRequest {
-    @NotBlank private String name;
-    @NotBlank private String description;
-    @NotBlank private String eventTime;
-    @NotBlank private String eventDay;
+  @NotBlank private String name;
+  @NotBlank private String description;
+  @NotBlank private String eventTime;
+  @NotBlank private String eventDay;
 }

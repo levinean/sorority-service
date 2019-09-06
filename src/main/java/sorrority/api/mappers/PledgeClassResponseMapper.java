@@ -22,6 +22,7 @@ public final class PledgeClassResponseMapper {
   }
 
   public static PledgeClassesResponse map(@NonNull final List<PledgeClass> rows) {
-    return new PledgeClassesResponse(unmodifiableList(rows.stream().map(row -> map(row)).collect(toList())));
+    return new PledgeClassesResponse(
+        unmodifiableList(rows.stream().map(row -> map(row)).collect(toList())));
   }
 }

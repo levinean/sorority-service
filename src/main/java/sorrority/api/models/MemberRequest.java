@@ -13,12 +13,12 @@ import org.hibernate.validator.constraints.NotBlank;
 @ToString
 @Getter
 public final class MemberRequest {
-    @NotBlank String name;
-    @NotBlank private UUID chapterUuid;
-    @NotBlank private UUID pledgeClassUuid;
-    @NotBlank private String graduatingYear;
-    @NotBlank private Boolean executive;
-    @NotBlank private String phoneNumber;
-    @NotBlank private String email;
-    @NotBlank private String birthday;
+  @NotBlank String name;
+  @NotBlank private UUID chapterUuid;
+  @NotBlank private UUID pledgeClassUuid;
+  @NotBlank private String graduatingYear;
+  @NotBlank private Boolean executive;
+  @NotBlank private String phoneNumber;
+  @NotBlank private String email;
+  @NotBlank private String birthday;
 }

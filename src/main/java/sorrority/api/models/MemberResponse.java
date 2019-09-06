@@ -12,16 +12,16 @@ import org.hibernate.validator.constraints.NotBlank;
 @Getter
 @Builder
 public final class MemberResponse {
-    @NotBlank private UUID uuid;
-    @NotBlank private String name;
-    @NotBlank private UUID chapterUuid;
-    @NotBlank private UUID pledgeClassUuid;
-    @NotBlank private String graduatingYear;
-    @NotBlank private String big;
-    @NotBlank private int sisterhoodPoints;
-    @NotBlank private Boolean executive;
-    @NotBlank private String phoneNumber;
-    @NotBlank private String email;
-    @NotBlank private String birthday;
-    @NotBlank private int duesPaid;
+  @NotBlank private UUID uuid;
+  @NotBlank private String name;
+  @NotBlank private UUID chapterUuid;
+  @NotBlank private UUID pledgeClassUuid;
+  @NotBlank private String graduatingYear;
+  @NotBlank private String big;
+  @NotBlank private int sisterhoodPoints;
+  @NotBlank private Boolean executive;
+  @NotBlank private String phoneNumber;
+  @NotBlank private String email;
+  @NotBlank private String birthday;
+  @NotBlank private int duesPaid;
 }

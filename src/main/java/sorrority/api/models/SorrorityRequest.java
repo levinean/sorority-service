@@ -12,5 +12,5 @@ import org.hibernate.validator.constraints.NotBlank;
 @ToString
 @Getter
 public final class SorrorityRequest {
-    @NotBlank String name;
+  @NotBlank String name;
 }

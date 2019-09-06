@@ -10,25 +10,22 @@ import java.util.Optional;
 import java.util.UUID;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DefaultValue;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import lombok.NonNull;
-
-import sorrority.service.MemberService;
-import sorrority.service.models.Member;
+import sorrority.api.mappers.MemberMapper;
+import sorrority.api.mappers.MemberResponseMapper;
 import sorrority.api.models.MemberRequest;
 import sorrority.api.models.MemberResponse;
 import sorrority.api.models.MembersResponse;
-import sorrority.api.mappers.MemberMapper;
-import sorrority.api.mappers.MemberResponseMapper;
-
+import sorrority.service.MemberService;
+import sorrority.service.models.Member;
 
 @Path("/api/v1")
 public final class MemberResource {
@@ -37,23 +34,6 @@ public final class MemberResource {
   public MemberResource(@NonNull final MemberService memberService) {
     this.memberService = memberService;
   }
-
-//   @Timed
-//   @ResponseMetered
-//   @ExceptionMetered
-//   @PUT
-//   @Path("/namespaces/{namespace}")
-//   @Consumes(APPLICATION_JSON)
-//   @Produces(APPLICATION_JSON)
-//   public Response createOrUpdate(
-//       @PathParam("namespace") String nameAsString, @Valid NamespaceRequest request)
-//       throws MarquezServiceException {
-//     final NamespaceName name = NamespaceName.of(nameAsString);
-//     final Namespace newNamespace = NamespaceMapper.map(name, request);
-//     final Namespace namespace = namespaceService.createOrUpdate(newNamespace);
-//     final NamespaceResponse response = NamespaceResponseMapper.map(namespace);
-//     return Response.ok(response).build();
-//   }
 
   @Timed
   @ResponseMetered
@@ -73,12 +53,10 @@ public final class MemberResource {
   @Path("/members/{memberUuid}")
   @Consumes(APPLICATION_JSON)
   @Produces(APPLICATION_JSON)
-  public Response getMember(
-      @PathParam("memberUuid") UUID uuid)
-      throws NotFoundException {
+  public Response getMember(@PathParam("memberUuid") UUID uuid) throws NotFoundException {
     final Optional<Member> member = memberService.getMember(uuid);
-    if(!member.isPresent()){
-        throw new NotFoundException();
+    if (!member.isPresent()) {
+      throw new NotFoundException();
     }
     final MemberResponse response = MemberResponseMapper.map(member.get());
     return Response.ok(response).build();
@@ -91,8 +69,7 @@ public final class MemberResource {
   @Path("/members/pledgeclass/{pledgeClassUuid}")
   @Consumes(APPLICATION_JSON)
   @Produces(APPLICATION_JSON)
-  public Response getMembersOfPledgeClass(
-      @PathParam("pledgeClassUuid") UUID uuid)
+  public Response getMembersOfPledgeClass(@PathParam("pledgeClassUuid") UUID uuid)
       throws NotFoundException {
     final List<Member> member = memberService.getAllMembersInPledgeClass(uuid);
     final MembersResponse response = MemberResponseMapper.map(member);
@@ -106,8 +83,7 @@ public final class MemberResource {
   @Path("/members/chapter/{chapterUuid}")
   @Consumes(APPLICATION_JSON)
   @Produces(APPLICATION_JSON)
-  public Response getMembersOfChapter(
-      @PathParam("chapterUuid") UUID uuid)
+  public Response getMembersOfChapter(@PathParam("chapterUuid") UUID uuid)
       throws NotFoundException {
     final List<Member> member = memberService.getAllMembersInChapter(uuid);
     final MembersResponse response = MemberResponseMapper.map(member);
@@ -117,7 +93,7 @@ public final class MemberResource {
   @Timed
   @ResponseMetered
   @ExceptionMetered
-  @PUT
+  @DELETE
   @Path("/members/{memberUuid}")
   public void deleteMember(@PathParam("memberUuid") UUID uuid) {
     memberService.deleteMember(uuid);
@@ -129,9 +105,8 @@ public final class MemberResource {
   @PUT
   @Path("/members/sisterhood/{memberUuid}/{newPoints}")
   public void updateSisterhoodPoints(
-      @PathParam("memberUuid") UUID uuid,
-      @PathParam("newPoints") int newPoints) {
-    memberService.updateSisterhoodPoints(uuid,newPoints);
+      @PathParam("memberUuid") UUID uuid, @PathParam("newPoints") int newPoints) {
+    memberService.updateSisterhoodPoints(uuid, newPoints);
   }
 
   @Timed
@@ -139,13 +114,7 @@ public final class MemberResource {
   @ExceptionMetered
   @PUT
   @Path("/members/sisterhood/{chapterUuid}")
-  public void resetSisterhoodPoints(
-      @PathParam("chapterUuid") UUID uuid) {
+  public void resetSisterhoodPoints(@PathParam("chapterUuid") UUID uuid) {
     memberService.resetSisterhoodPoints(uuid);
   }
-
-
-
-
-  
 }

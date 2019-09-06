@@ -25,6 +25,7 @@ public final class EventResponseMapper {
   }
 
   public static EventsResponse map(@NonNull final List<Event> rows) {
-    return new EventsResponse(unmodifiableList(rows.stream().map(row -> map(row)).collect(toList())));
+    return new EventsResponse(
+        unmodifiableList(rows.stream().map(row -> map(row)).collect(toList())));
   }
 }

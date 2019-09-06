@@ -21,6 +21,7 @@ public final class CommentResponseMapper {
   }
 
   public static CommentsResponse map(@NonNull final List<Comment> rows) {
-    return new CommentsResponse(unmodifiableList(rows.stream().map(row -> map(row)).collect(toList())));
+    return new CommentsResponse(
+        unmodifiableList(rows.stream().map(row -> map(row)).collect(toList())));
   }
 }

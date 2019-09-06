@@ -12,7 +12,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Getter
 @Builder
 public final class ChapterResponse {
-    @NotBlank private UUID uuid;
-    @NotBlank private String name;
-    @NotBlank private UUID sorrorityUuid;
+  @NotBlank private UUID uuid;
+  @NotBlank private String name;
+  @NotBlank private UUID sorrorityUuid;
 }

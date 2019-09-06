@@ -21,6 +21,7 @@ public final class AnnouncementResponseMapper {
   }
 
   public static AnnouncementsResponse map(@NonNull final List<Announcement> rows) {
-    return new AnnouncementsResponse(unmodifiableList(rows.stream().map(row -> map(row)).collect(toList())));
+    return new AnnouncementsResponse(
+        unmodifiableList(rows.stream().map(row -> map(row)).collect(toList())));
   }
 }

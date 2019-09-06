@@ -17,6 +17,7 @@ public final class SorrorityResponseMapper {
   }
 
   public static SorroritysResponse map(@NonNull final List<Sorrority> rows) {
-    return new SorroritysResponse(unmodifiableList(rows.stream().map(row -> map(row)).collect(toList())));
+    return new SorroritysResponse(
+        unmodifiableList(rows.stream().map(row -> map(row)).collect(toList())));
   }
 }

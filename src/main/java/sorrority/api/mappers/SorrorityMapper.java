@@ -1,7 +1,6 @@
 package sorrority.api.mappers;
 
 import java.util.UUID;
-
 import lombok.NonNull;
 import sorrority.api.models.SorrorityRequest;
 import sorrority.service.models.Sorrority;

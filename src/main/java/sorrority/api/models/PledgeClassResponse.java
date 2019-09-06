@@ -12,8 +12,8 @@ import org.hibernate.validator.constraints.NotBlank;
 @Getter
 @Builder
 public final class PledgeClassResponse {
-    @NotBlank private UUID uuid;
-    @NotBlank private String name;
-    @NotBlank private UUID chapterUuid;
-    @NotBlank private UUID sorrorityUuid;
+  @NotBlank private UUID uuid;
+  @NotBlank private String name;
+  @NotBlank private UUID chapterUuid;
+  @NotBlank private UUID sorrorityUuid;
 }

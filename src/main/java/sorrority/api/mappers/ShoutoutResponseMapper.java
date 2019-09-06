@@ -21,6 +21,7 @@ public final class ShoutoutResponseMapper {
   }
 
   public static ShoutoutsResponse map(@NonNull final List<Shoutout> rows) {
-    return new ShoutoutsResponse(unmodifiableList(rows.stream().map(row -> map(row)).collect(toList())));
+    return new ShoutoutsResponse(
+        unmodifiableList(rows.stream().map(row -> map(row)).collect(toList())));
   }
 }

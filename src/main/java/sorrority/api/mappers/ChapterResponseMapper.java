@@ -21,6 +21,7 @@ public final class ChapterResponseMapper {
   }
 
   public static ChaptersResponse map(@NonNull final List<Chapter> rows) {
-    return new ChaptersResponse(unmodifiableList(rows.stream().map(row -> map(row)).collect(toList())));
+    return new ChaptersResponse(
+        unmodifiableList(rows.stream().map(row -> map(row)).collect(toList())));
   }
 }
