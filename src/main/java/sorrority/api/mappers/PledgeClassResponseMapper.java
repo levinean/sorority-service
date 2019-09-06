@@ -6,6 +6,7 @@ import static java.util.stream.Collectors.toList;
 import java.util.List;
 import lombok.NonNull;
 import sorrority.api.models.PledgeClassResponse;
+import sorrority.api.models.PledgeClassesResponse;
 import sorrority.service.models.PledgeClass;
 
 public final class PledgeClassResponseMapper {
@@ -20,7 +21,7 @@ public final class PledgeClassResponseMapper {
         .build();
   }
 
-  public static List<PledgeClassResponse> map(@NonNull final List<PledgeClass> rows) {
-    return unmodifiableList(rows.stream().map(row -> map(row)).collect(toList()));
+  public static PledgeClassesResponse map(@NonNull final List<PledgeClass> rows) {
+    return new PledgeClassesResponse(unmodifiableList(rows.stream().map(row -> map(row)).collect(toList())));
   }
 }

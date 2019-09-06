@@ -6,6 +6,7 @@ import static java.util.stream.Collectors.toList;
 import java.util.List;
 import lombok.NonNull;
 import sorrority.api.models.EventResponse;
+import sorrority.api.models.EventsResponse;
 import sorrority.service.models.Event;
 
 public final class EventResponseMapper {
@@ -23,7 +24,7 @@ public final class EventResponseMapper {
         .build();
   }
 
-  public static List<EventResponse> map(@NonNull final List<Event> rows) {
-    return unmodifiableList(rows.stream().map(row -> map(row)).collect(toList()));
+  public static EventsResponse map(@NonNull final List<Event> rows) {
+    return new EventsResponse(unmodifiableList(rows.stream().map(row -> map(row)).collect(toList())));
   }
 }

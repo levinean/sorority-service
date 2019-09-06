@@ -6,6 +6,7 @@ import static java.util.stream.Collectors.toList;
 import java.util.List;
 import lombok.NonNull;
 import sorrority.api.models.CommentResponse;
+import sorrority.api.models.CommentsResponse;
 import sorrority.service.models.Comment;
 
 public final class CommentResponseMapper {
@@ -19,7 +20,7 @@ public final class CommentResponseMapper {
         .build();
   }
 
-  public static List<CommentResponse> map(@NonNull final List<Comment> rows) {
-    return unmodifiableList(rows.stream().map(row -> map(row)).collect(toList()));
+  public static CommentsResponse map(@NonNull final List<Comment> rows) {
+    return new CommentsResponse(unmodifiableList(rows.stream().map(row -> map(row)).collect(toList())));
   }
 }
