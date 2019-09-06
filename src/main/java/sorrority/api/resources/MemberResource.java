@@ -25,6 +25,7 @@ import sorrority.service.MemberService;
 import sorrority.service.models.Member;
 import sorrority.api.models.MemberRequest;
 import sorrority.api.models.MemberResponse;
+import sorrority.api.models.MembersResponse;
 import sorrority.api.mappers.MemberMapper;
 import sorrority.api.mappers.MemberResponseMapper;
 
@@ -60,8 +61,7 @@ public final class MemberResource {
   @PUT
   @Path("/members/")
   @Consumes(APPLICATION_JSON)
-  @Produces(APPLICATION_JSON)
-  public void createOrUpdate(@Valid MemberRequest request) {
+  public void createMember(@Valid MemberRequest request) {
     final Member newMember = MemberMapper.map(request);
     memberService.createMember(newMember);
   }
@@ -91,13 +91,61 @@ public final class MemberResource {
   @Path("/members/pledgeclass/{pledgeClassUuid}")
   @Consumes(APPLICATION_JSON)
   @Produces(APPLICATION_JSON)
-  public Response createOrUpdate(
+  public Response getMembersOfPledgeClass(
       @PathParam("pledgeClassUuid") UUID uuid)
       throws NotFoundException {
     final List<Member> member = memberService.getAllMembersInPledgeClass(uuid);
-    final MemberResponse response = MemberResponseMapper.map(member);
+    final MembersResponse response = MemberResponseMapper.map(member);
     return Response.ok(response).build();
   }
+
+  @Timed
+  @ResponseMetered
+  @ExceptionMetered
+  @GET
+  @Path("/members/chapter/{chapterUuid}")
+  @Consumes(APPLICATION_JSON)
+  @Produces(APPLICATION_JSON)
+  public Response getMembersOfChapter(
+      @PathParam("chapterUuid") UUID uuid)
+      throws NotFoundException {
+    final List<Member> member = memberService.getAllMembersInChapter(uuid);
+    final MembersResponse response = MemberResponseMapper.map(member);
+    return Response.ok(response).build();
+  }
+
+  @Timed
+  @ResponseMetered
+  @ExceptionMetered
+  @PUT
+  @Path("/members/{memberUuid}")
+  public void deleteMember(@PathParam("memberUuid") UUID uuid) {
+    memberService.deleteMember(uuid);
+  }
+
+  @Timed
+  @ResponseMetered
+  @ExceptionMetered
+  @PUT
+  @Path("/members/sisterhood/{memberUuid}/{newPoints}")
+  public void updateSisterhoodPoints(
+      @PathParam("memberUuid") UUID uuid,
+      @PathParam("newPoints") int newPoints) {
+    memberService.updateSisterhoodPoints(uuid,newPoints);
+  }
+
+  @Timed
+  @ResponseMetered
+  @ExceptionMetered
+  @PUT
+  @Path("/members/sisterhood/{chapterUuid}")
+  public void resetSisterhoodPoints(
+      @PathParam("chapterUuid") UUID uuid) {
+    memberService.resetSisterhoodPoints(uuid);
+  }
+
+
+
 
   
 }
