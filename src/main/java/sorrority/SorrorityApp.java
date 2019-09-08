@@ -26,24 +26,11 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import sorrority.db.AnnouncementDao;
-import sorrority.db.ChapterDao;
-import sorrority.db.CommentDao;
-import sorrority.db.EventDao;
-import sorrority.db.MembersDao;
-import sorrority.db.PledgeClassDao;
-import sorrority.db.ShoutoutDao;
-import sorrority.db.SorrorityDao;
-
-import sorrority.service.AnnouncementService;
-import sorrority.service.ChapterService;
-import sorrority.service.CommentService;
-import sorrority.service.EventService;
-import sorrority.service.MemberService;
-import sorrority.service.PledgeClassService;
-import sorrority.service.ShoutoutService;
-import sorrority.service.SorrorityService;
-
+import org.flywaydb.core.Flyway;
+import org.flywaydb.core.api.FlywayException;
+import org.jdbi.v3.core.Jdbi;
+import org.jdbi.v3.postgres.PostgresPlugin;
+import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 import sorrority.api.resources.AnnouncementResource;
 import sorrority.api.resources.ChapterResource;
 import sorrority.api.resources.CommentResource;
@@ -52,12 +39,22 @@ import sorrority.api.resources.MemberResource;
 import sorrority.api.resources.PledgeClassResource;
 import sorrority.api.resources.ShoutoutResource;
 import sorrority.api.resources.SorrorityResource;
-
-import org.flywaydb.core.Flyway;
-import org.flywaydb.core.api.FlywayException;
-import org.jdbi.v3.core.Jdbi;
-import org.jdbi.v3.postgres.PostgresPlugin;
-import org.jdbi.v3.sqlobject.SqlObjectPlugin;
+import sorrority.db.AnnouncementDao;
+import sorrority.db.ChapterDao;
+import sorrority.db.CommentDao;
+import sorrority.db.EventDao;
+import sorrority.db.MembersDao;
+import sorrority.db.PledgeClassDao;
+import sorrority.db.ShoutoutDao;
+import sorrority.db.SorrorityDao;
+import sorrority.service.AnnouncementService;
+import sorrority.service.ChapterService;
+import sorrority.service.CommentService;
+import sorrority.service.EventService;
+import sorrority.service.MemberService;
+import sorrority.service.PledgeClassService;
+import sorrority.service.ShoutoutService;
+import sorrority.service.SorrorityService;
 
 @Slf4j
 public class SorrorityApp extends Application<SorrorityConfig> {
@@ -98,8 +95,8 @@ public class SorrorityApp extends Application<SorrorityConfig> {
   }
 
   @Override
-  public void run(@NonNull SorrorityConfig config, @NonNull Environment env) throws
-MarquezException {
+  public void run(@NonNull SorrorityConfig config, @NonNull Environment env)
+      throws MarquezException {
     migrateDbOrError(config);
     registerResources(config, env);
   }
@@ -151,8 +148,8 @@ MarquezException {
     final ShoutoutDao shoutoutDao = jdbi.onDemand(ShoutoutDao.class);
     final AnnouncementDao announcementDao = jdbi.onDemand(AnnouncementDao.class);
 
-    final MemberService memberService = new MemberService(memberDao,chapterDao);
-    final EventService eventService = new EventService(eventDao,commentDao);
+    final MemberService memberService = new MemberService(memberDao, chapterDao);
+    final EventService eventService = new EventService(eventDao, commentDao);
     final SorrorityService sorrorityService = new SorrorityService(sorrorityDao);
     final PledgeClassService pledgeClassService = new PledgeClassService(pledgeClassDao);
     final ChapterService chapterService = new ChapterService(chapterDao);
@@ -168,6 +165,5 @@ MarquezException {
     env.jersey().register(new ShoutoutResource(shoutoutService));
     env.jersey().register(new AnnouncementResource(announcementService));
     env.jersey().register(new CommentResource(commentService));
-
   }
 }
