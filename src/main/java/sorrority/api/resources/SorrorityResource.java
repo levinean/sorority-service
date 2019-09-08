@@ -62,7 +62,6 @@ public final class SorrorityResource {
     return Response.ok(response).build();
   }
 
-
   @Timed
   @ResponseMetered
   @ExceptionMetered

@@ -62,7 +62,6 @@ public final class ChapterResource {
     return Response.ok(response).build();
   }
 
-
   @Timed
   @ResponseMetered
   @ExceptionMetered
@@ -71,8 +70,8 @@ public final class ChapterResource {
   @Consumes(APPLICATION_JSON)
   @Produces(APPLICATION_JSON)
   public Response getAllChapter() {
-    final List<Chapter> sorrorities = chapterService.getAll();
-    final ChaptersResponse response = ChapterResponseMapper.map(sorrorities);
+    final List<Chapter> chapters = chapterService.getAll();
+    final ChaptersResponse response = ChapterResponseMapper.map(chapters);
     return Response.ok(response).build();
   }
 

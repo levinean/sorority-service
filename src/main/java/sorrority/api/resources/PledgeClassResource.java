@@ -62,7 +62,6 @@ public final class PledgeClassResource {
     return Response.ok(response).build();
   }
 
-
   @Timed
   @ResponseMetered
   @ExceptionMetered
@@ -71,8 +70,8 @@ public final class PledgeClassResource {
   @Consumes(APPLICATION_JSON)
   @Produces(APPLICATION_JSON)
   public Response getAllPledgeClass() {
-    final List<PledgeClass> sorrorities = pledgeClassService.getAll();
-    final PledgeClassesResponse response = PledgeClassResponseMapper.map(sorrorities);
+    final List<PledgeClass> pledgeClasses = pledgeClassService.getAll();
+    final PledgeClassesResponse response = PledgeClassResponseMapper.map(pledgeClasses);
     return Response.ok(response).build();
   }
 
