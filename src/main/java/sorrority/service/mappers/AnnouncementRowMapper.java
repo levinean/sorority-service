@@ -12,6 +12,7 @@ public final class AnnouncementRowMapper {
         .uuid(announcement.getUuid())
         .announcement(announcement.getAnnouncement())
         .createdAt(announcement.getCreatedAt())
+        .sorrorityUuid(announcement.getSorrorityUuid())
         .build();
   }
 }

@@ -5,7 +5,6 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import com.codahale.metrics.annotation.ExceptionMetered;
 import com.codahale.metrics.annotation.ResponseMetered;
 import com.codahale.metrics.annotation.Timed;
-import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 import javax.validation.Valid;
@@ -57,16 +56,16 @@ public final class ShoutoutResource {
     return Response.ok(response).build();
   }
 
-  @Timed
-  @ResponseMetered
-  @ExceptionMetered
-  @DELETE
-  @Path("/shoutouts/cleanup/{time}")
-  @Consumes(APPLICATION_JSON)
-  @Produces(APPLICATION_JSON)
-  public void cleanUpShoutout(@PathParam("time") Instant time) {
-    shoutoutService.cleanUpShoutouts(time);
-  }
+  // @Timed
+  // @ResponseMetered
+  // @ExceptionMetered
+  // @DELETE
+  // @Path("/shoutouts/cleanup/{time}")
+  // @Consumes(APPLICATION_JSON)
+  // @Produces(APPLICATION_JSON)
+  // public void cleanUpShoutout(@PathParam("time") Instant time) {
+  //   shoutoutService.cleanUpShoutouts(time);
+  // }
 
   @Timed
   @ResponseMetered

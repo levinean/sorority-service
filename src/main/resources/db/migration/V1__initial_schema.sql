@@ -51,9 +51,10 @@ CREATE TABLE comments (
 );
 
 CREATE TABLE announcements (
-  uuid         UUID PRIMARY KEY,
-  announcement VARCHAR(1000) NOT NULL,
-  created_at   TIMESTAMP
+  uuid           UUID PRIMARY KEY,
+  announcement   VARCHAR(1000) NOT NULL,
+  created_at     TIMESTAMP,
+  sorrority_uuid UUID NOT NULL
 );
 
 CREATE TABLE shoutouts (
