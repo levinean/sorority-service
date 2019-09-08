@@ -18,4 +18,4 @@ set -eu
 
 ./wait-for-db.sh "${POSTGRES_HOST:-localhost}" "${POSTGRES_PORT:-5432}"
 
-java -Duser.timezone=UTC -jar marquez-*.jar server "${SORRORITY_CONFIG}"
+java -Duser.timezone=UTC -jar sorrority-*.jar server "${SORRORITY_CONFIG}"

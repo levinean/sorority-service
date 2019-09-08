@@ -17,15 +17,15 @@
 set -eu
 
 readonly SEMVER_REGEX="^[0-9]+(\.[0-9]+){2}$" # X.Y.Z
-readonly ORG="marquezproject"
-readonly REPO="marquez"
+readonly ORG="sorrorityproject"
+readonly REPO="sorrorityService"
 readonly NAME="${ORG}/${REPO}"
 
 # Change working directory to project root
 project_root=$(git rev-parse --show-toplevel)
 cd "${project_root}"
 
-# Version X.Y.Z of Marquez image to build
+# Version X.Y.Z of Sorrority image to build
 version="${1}"
 
 # Ensure valid version 
