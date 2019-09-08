@@ -37,7 +37,7 @@ public class AnnouncementService {
     log.info("Announcements deleted from before " + time.toString());
   }
 
-  public List<Announcement> getAll() {
-    return AnnouncementMapper.map(announcementDao.getAll());
+  public List<Announcement> getAllInSorrority(UUID uuid) {
+    return AnnouncementMapper.map(announcementDao.getAllInSorrority(uuid));
   }
 }

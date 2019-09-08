@@ -20,6 +20,7 @@ public final class AnnouncementRowMapper implements RowMapper<AnnouncementRow> {
         .uuid(uuidOrNull(results, Columns.ROW_UUID))
         .announcement(stringOrNull(results, Columns.ANNOUNCEMENT))
         .createdAt(timestampOrNull(results, Columns.CREATED_AT))
+        .sorrorityUuid(uuidOrNull(results, Columns.SORRORITY_UUID))
         .build();
   }
 }

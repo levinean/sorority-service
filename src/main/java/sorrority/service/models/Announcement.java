@@ -11,4 +11,5 @@ public class Announcement {
   private UUID uuid;
   private String announcement;
   private Instant createdAt;
+  private UUID sorrorityUuid;
 }

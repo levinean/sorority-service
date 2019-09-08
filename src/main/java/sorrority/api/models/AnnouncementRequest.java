@@ -1,6 +1,7 @@
 package sorrority.api.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -13,4 +14,5 @@ import org.hibernate.validator.constraints.NotBlank;
 @Getter
 public final class AnnouncementRequest {
   @NotBlank private String announcement;
+  @NotBlank private UUID sorrorityUuid;
 }

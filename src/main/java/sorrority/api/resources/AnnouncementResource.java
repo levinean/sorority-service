@@ -5,7 +5,6 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import com.codahale.metrics.annotation.ExceptionMetered;
 import com.codahale.metrics.annotation.ResponseMetered;
 import com.codahale.metrics.annotation.Timed;
-import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 import javax.validation.Valid;
@@ -48,25 +47,25 @@ public final class AnnouncementResource {
   @ResponseMetered
   @ExceptionMetered
   @GET
-  @Path("/announcements/")
+  @Path("/announcements/{sorrorityUuid}")
   @Consumes(APPLICATION_JSON)
   @Produces(APPLICATION_JSON)
-  public Response getAllAnnouncement() {
-    final List<Announcement> Announcements = announcementService.getAll();
+  public Response getAllAnnouncementInSorrority(@PathParam("sorrorityUuid") UUID uuid) {
+    final List<Announcement> Announcements = announcementService.getAllInSorrority(uuid);
     final AnnouncementsResponse response = AnnouncementResponseMapper.map(Announcements);
     return Response.ok(response).build();
   }
 
-  @Timed
-  @ResponseMetered
-  @ExceptionMetered
-  @DELETE
-  @Path("/announcements/cleanup/{time}")
-  @Consumes(APPLICATION_JSON)
-  @Produces(APPLICATION_JSON)
-  public void cleanUpAnnouncement(@PathParam("time") Instant time) {
-    announcementService.cleanUpAnnouncements(time);
-  }
+  // @Timed
+  // @ResponseMetered
+  // @ExceptionMetered
+  // @DELETE
+  // @Path("/announcements/cleanup/{time}")
+  // @Consumes(APPLICATION_JSON)
+  // @Produces(APPLICATION_JSON)
+  // public void cleanUpAnnouncement(@PathParam("time") Instant time) {
+  //   announcementService.cleanUpAnnouncements(time);
+  // }
 
   @Timed
   @ResponseMetered

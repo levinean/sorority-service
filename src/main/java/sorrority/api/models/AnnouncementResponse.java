@@ -16,4 +16,5 @@ public final class AnnouncementResponse {
   @NotBlank private UUID uuid;
   @NotBlank private String announcement;
   @NotBlank private Instant createdAt;
+  @NotBlank private UUID sorrorityUuid;
 }

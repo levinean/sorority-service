@@ -14,6 +14,7 @@ public final class AnnouncementMapper {
         .uuid(UUID.randomUUID())
         .announcement(announcement.getAnnouncement())
         .createdAt(Instant.now())
+        .sorrorityUuid(announcement.getSorrorityUuid())
         .build();
   }
 }

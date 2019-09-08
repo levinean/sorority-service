@@ -45,6 +45,6 @@ public interface AnnouncementDao {
   @SqlUpdate("DELETE FROM announcements WHERE created_at < :time")
   void cleanUpAnnouncements(Instant time);
 
-  @SqlQuery("SELECT * FROM announcements")
-  List<AnnouncementRow> getAll();
+  @SqlQuery("SELECT * FROM announcements WHERE sorrority_uuid = :uuid")
+  List<AnnouncementRow> getAllInSorrority(UUID uuid);
 }
