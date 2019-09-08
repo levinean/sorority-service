@@ -12,5 +12,5 @@ import org.hibernate.validator.constraints.NotBlank;
 @ToString
 @Getter
 public final class AnnouncementRequest {
-    @NotBlank private String announcement;
+  @NotBlank private String announcement;
 }

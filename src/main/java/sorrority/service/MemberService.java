@@ -14,12 +14,11 @@ import sorrority.service.mappers.MemberRowMapper;
 import sorrority.service.models.Member;
 
 @Slf4j
-public class MembersService {
+public class MemberService {
   private final MembersDao membersDao;
   private final ChapterDao chapterDao;
 
-  public MembersService(
-      @NonNull final MembersDao membersDao, @NonNull final ChapterDao chapterDao) {
+  public MemberService(@NonNull final MembersDao membersDao, @NonNull final ChapterDao chapterDao) {
     this.membersDao = membersDao;
     this.chapterDao = chapterDao;
   }

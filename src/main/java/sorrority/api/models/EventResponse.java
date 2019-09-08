@@ -12,11 +12,11 @@ import org.hibernate.validator.constraints.NotBlank;
 @Getter
 @Builder
 public final class EventResponse {
-    @NotBlank private UUID uuid;
-    @NotBlank private String name;
-    @NotBlank private String description;
-    @NotBlank private String eventTime;
-    @NotBlank private String eventDay;
-    @NotBlank private int score;
-    @NotBlank private int numberAttended;
+  @NotBlank private UUID uuid;
+  @NotBlank private String name;
+  @NotBlank private String description;
+  @NotBlank private String eventTime;
+  @NotBlank private String eventDay;
+  @NotBlank private int score;
+  @NotBlank private int numberAttended;
 }

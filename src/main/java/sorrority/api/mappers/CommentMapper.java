@@ -1,7 +1,6 @@
 package sorrority.api.mappers;
 
 import java.util.UUID;
-
 import lombok.NonNull;
 import sorrority.api.models.CommentRequest;
 import sorrority.service.models.Comment;

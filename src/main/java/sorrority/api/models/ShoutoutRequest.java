@@ -12,5 +12,5 @@ import org.hibernate.validator.constraints.NotBlank;
 @ToString
 @Getter
 public final class ShoutoutRequest {
-    @NotBlank private String shoutout;
+  @NotBlank private String shoutout;
 }

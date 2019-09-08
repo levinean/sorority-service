@@ -13,6 +13,6 @@ import org.hibernate.validator.constraints.NotBlank;
 @ToString
 @Getter
 public final class CommentRequest {
-    @NotBlank private String comment;
-    @NotBlank private UUID eventUuid;
+  @NotBlank private String comment;
+  @NotBlank private UUID eventUuid;
 }

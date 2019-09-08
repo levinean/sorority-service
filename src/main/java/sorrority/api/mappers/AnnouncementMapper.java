@@ -2,7 +2,6 @@ package sorrority.api.mappers;
 
 import java.time.Instant;
 import java.util.UUID;
-
 import lombok.NonNull;
 import sorrority.api.models.AnnouncementRequest;
 import sorrority.service.models.Announcement;

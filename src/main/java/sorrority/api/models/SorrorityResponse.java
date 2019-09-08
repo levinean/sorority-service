@@ -12,6 +12,6 @@ import org.hibernate.validator.constraints.NotBlank;
 @Getter
 @Builder
 public final class SorrorityResponse {
-    @NotBlank private UUID uuid;
-    @NotBlank private String name;
+  @NotBlank private UUID uuid;
+  @NotBlank private String name;
 }

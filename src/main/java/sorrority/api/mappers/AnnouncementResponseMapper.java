@@ -6,6 +6,7 @@ import static java.util.stream.Collectors.toList;
 import java.util.List;
 import lombok.NonNull;
 import sorrority.api.models.AnnouncementResponse;
+import sorrority.api.models.AnnouncementsResponse;
 import sorrority.service.models.Announcement;
 
 public final class AnnouncementResponseMapper {
@@ -19,7 +20,8 @@ public final class AnnouncementResponseMapper {
         .build();
   }
 
-  public static List<AnnouncementResponse> map(@NonNull final List<Announcement> rows) {
-    return unmodifiableList(rows.stream().map(row -> map(row)).collect(toList()));
+  public static AnnouncementsResponse map(@NonNull final List<Announcement> rows) {
+    return new AnnouncementsResponse(
+        unmodifiableList(rows.stream().map(row -> map(row)).collect(toList())));
   }
 }

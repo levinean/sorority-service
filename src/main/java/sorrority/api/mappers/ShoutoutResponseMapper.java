@@ -6,6 +6,7 @@ import static java.util.stream.Collectors.toList;
 import java.util.List;
 import lombok.NonNull;
 import sorrority.api.models.ShoutoutResponse;
+import sorrority.api.models.ShoutoutsResponse;
 import sorrority.service.models.Shoutout;
 
 public final class ShoutoutResponseMapper {
@@ -19,7 +20,8 @@ public final class ShoutoutResponseMapper {
         .build();
   }
 
-  public static List<ShoutoutResponse> map(@NonNull final List<Shoutout> rows) {
-    return unmodifiableList(rows.stream().map(row -> map(row)).collect(toList()));
+  public static ShoutoutsResponse map(@NonNull final List<Shoutout> rows) {
+    return new ShoutoutsResponse(
+        unmodifiableList(rows.stream().map(row -> map(row)).collect(toList())));
   }
 }

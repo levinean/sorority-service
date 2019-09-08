@@ -13,6 +13,6 @@ import org.hibernate.validator.constraints.NotBlank;
 @ToString
 @Getter
 public final class ChapterRequest {
-    @NotBlank String name;
-    @NotBlank private UUID sorrorityUuid;
+  @NotBlank String name;
+  @NotBlank private UUID sorrorityUuid;
 }

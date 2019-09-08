@@ -2,7 +2,6 @@ package sorrority.api.mappers;
 
 import java.time.Instant;
 import java.util.UUID;
-
 import lombok.NonNull;
 import sorrority.api.models.ShoutoutRequest;
 import sorrority.service.models.Shoutout;
